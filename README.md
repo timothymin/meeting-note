@@ -6,11 +6,11 @@
 [![Swift 6](https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
 [![MLX](https://img.shields.io/badge/Apple-MLX-5E5CE6)](https://github.com/ml-explore/mlx-swift)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/joonkyu-vital/meeting-note/actions/workflows/ci.yml/badge.svg)](https://github.com/joonkyu-vital/meeting-note/actions/workflows/ci.yml)
+[![CI](https://github.com/timothymin/meeting-note/actions/workflows/ci.yml/badge.svg)](https://github.com/timothymin/meeting-note/actions/workflows/ci.yml)
 
 Meeting Note is a native macOS menu-bar app that runs Whisper locally with Apple MLX, shows a near-real-time transcript, and saves each recording as a Markdown file. Audio is not sent to a transcription service.
 
-[Download the latest release](https://github.com/joonkyu-vital/meeting-note/releases/latest) · [Report a bug](https://github.com/joonkyu-vital/meeting-note/issues/new?template=bug_report.yml) · [Request a feature](https://github.com/joonkyu-vital/meeting-note/issues/new?template=feature_request.yml)
+[Download the latest release](https://github.com/timothymin/meeting-note/releases/latest) · [Report a bug](https://github.com/timothymin/meeting-note/issues/new?template=bug_report.yml) · [Request a feature](https://github.com/timothymin/meeting-note/issues/new?template=feature_request.yml)
 
 > The current community build is ad-hoc signed. On first launch, macOS may require right-clicking the app and choosing **Open**. Apple notarization is planned for a future release.
 
@@ -46,7 +46,7 @@ Meeting Note is a native macOS menu-bar app that runs Whisper locally with Apple
 
 ### Direct download
 
-Download the DMG from [GitHub Releases](https://github.com/joonkyu-vital/meeting-note/releases/latest), open it, then drag Meeting Note onto the Applications shortcut.
+Download the DMG from [GitHub Releases](https://github.com/timothymin/meeting-note/releases/latest), open it, then drag Meeting Note onto the Applications shortcut.
 
 ### One command
 
