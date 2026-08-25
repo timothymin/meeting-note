@@ -1,0 +1,41 @@
+name: Bug report
+description: Report a reproducible problem with Meeting Note
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping improve Meeting Note. Do not include private transcript content.
+  - type: input
+    id: mac
+    attributes:
+      label: Mac and macOS version
+      placeholder: M2 MacBook Air, macOS 15.5
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Meeting Note version
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: Describe exactly what you did and what happened.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Remove transcript text and any personal information before posting.
+      render: shell

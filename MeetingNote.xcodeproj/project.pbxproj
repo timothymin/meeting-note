@@ -1,0 +1,113 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		010000000000000000000001 /* MeetingNoteApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000001 /* MeetingNoteApp.swift */; };
+		010000000000000000000002 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000002 /* AppModel.swift */; };
+		010000000000000000000003 /* TranscriptSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000003 /* TranscriptSession.swift */; };
+		010000000000000000000004 /* TranscriptStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000004 /* TranscriptStore.swift */; };
+		010000000000000000000005 /* WhisperTranscriptionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000005 /* WhisperTranscriptionEngine.swift */; };
+		010000000000000000000006 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000006 /* MenuBarView.swift */; };
+		010000000000000000000007 /* TranscriptWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000007 /* TranscriptWindow.swift */; };
+		010000000000000000000008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000008 /* SettingsView.swift */; };
+		010000000000000000000009 /* MLXAudioSTT in Frameworks */ = {isa = PBXBuildFile; productRef = 090000000000000000000001 /* MLXAudioSTT */; };
+		01000000000000000000000B /* MLXAudioCore in Frameworks */ = {isa = PBXBuildFile; productRef = 090000000000000000000003 /* MLXAudioCore */; };
+		01000000000000000000000A /* TranscriptStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000000000000000000000A /* TranscriptStoreTests.swift */; };
+		01000000000000000000000C /* TranscriptFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000000000000000000000D /* TranscriptFile.swift */; };
+		01000000000000000000000D /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000000000000000000000E /* AudioRecorder.swift */; };
+		01000000000000000000000E /* TranscriptMerger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02000000000000000000000F /* TranscriptMerger.swift */; };
+		01000000000000000000000F /* TranscriptLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000010 /* TranscriptLibrary.swift */; };
+		010000000000000000000010 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020000000000000000000011 /* DesignSystem.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0A0000000000000000000001 = {isa = PBXContainerItemProxy; containerPortal = 080000000000000000000001 /* Project object */; proxyType = 1; remoteGlobalIDString = 060000000000000000000001; remoteInfo = MeetingNote; };
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		020000000000000000000001 /* MeetingNoteApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingNoteApp.swift; sourceTree = "<group>"; };
+		020000000000000000000002 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		020000000000000000000003 /* TranscriptSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptSession.swift; sourceTree = "<group>"; };
+		020000000000000000000004 /* TranscriptStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptStore.swift; sourceTree = "<group>"; };
+		020000000000000000000005 /* WhisperTranscriptionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhisperTranscriptionEngine.swift; sourceTree = "<group>"; };
+		020000000000000000000006 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		020000000000000000000007 /* TranscriptWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptWindow.swift; sourceTree = "<group>"; };
+		020000000000000000000008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		020000000000000000000009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		02000000000000000000000A /* TranscriptStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptStoreTests.swift; sourceTree = "<group>"; };
+		02000000000000000000000B /* MeetingNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetingNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02000000000000000000000C /* MeetingNoteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeetingNoteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02000000000000000000000D /* TranscriptFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptFile.swift; sourceTree = "<group>"; };
+		02000000000000000000000E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		02000000000000000000000F /* TranscriptMerger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptMerger.swift; sourceTree = "<group>"; };
+		020000000000000000000010 /* TranscriptLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptLibrary.swift; sourceTree = "<group>"; };
+		020000000000000000000011 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		030000000000000000000001 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (010000000000000000000009 /* MLXAudioSTT in Frameworks */, 01000000000000000000000B /* MLXAudioCore in Frameworks */); runOnlyForDeploymentPostprocessing = 0; };
+		030000000000000000000002 = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		040000000000000000000001 = {isa = PBXGroup; children = (040000000000000000000002 /* MeetingNote */, 040000000000000000000006 /* MeetingNoteTests */, 040000000000000000000007 /* Products */); sourceTree = "<group>"; };
+		040000000000000000000002 /* MeetingNote */ = {isa = PBXGroup; children = (020000000000000000000001, 020000000000000000000002, 040000000000000000000003 /* Models */, 040000000000000000000004 /* Services */, 040000000000000000000005 /* Views */, 020000000000000000000009); path = MeetingNote; sourceTree = "<group>"; };
+		040000000000000000000003 /* Models */ = {isa = PBXGroup; children = (020000000000000000000003, 02000000000000000000000D); path = Models; sourceTree = "<group>"; };
+		040000000000000000000004 /* Services */ = {isa = PBXGroup; children = (020000000000000000000004, 020000000000000000000005, 02000000000000000000000E, 02000000000000000000000F, 020000000000000000000010); path = Services; sourceTree = "<group>"; };
+		040000000000000000000005 /* Views */ = {isa = PBXGroup; children = (020000000000000000000006, 020000000000000000000007, 020000000000000000000008, 020000000000000000000011); path = Views; sourceTree = "<group>"; };
+		040000000000000000000006 /* MeetingNoteTests */ = {isa = PBXGroup; children = (02000000000000000000000A,); path = MeetingNoteTests; sourceTree = "<group>"; };
+		040000000000000000000007 /* Products */ = {isa = PBXGroup; children = (02000000000000000000000B, 02000000000000000000000C); name = Products; sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		060000000000000000000001 /* MeetingNote */ = {isa = PBXNativeTarget; buildConfigurationList = 070000000000000000000001; buildPhases = (050000000000000000000001, 030000000000000000000001, 050000000000000000000002); buildRules = (); dependencies = (); name = MeetingNote; packageProductDependencies = (090000000000000000000001 /* MLXAudioSTT */, 090000000000000000000003 /* MLXAudioCore */); productName = MeetingNote; productReference = 02000000000000000000000B; productType = "com.apple.product-type.application"; };
+		060000000000000000000002 /* MeetingNoteTests */ = {isa = PBXNativeTarget; buildConfigurationList = 070000000000000000000002; buildPhases = (050000000000000000000003, 030000000000000000000002); buildRules = (); dependencies = (0B0000000000000000000001,); name = MeetingNoteTests; productName = MeetingNoteTests; productReference = 02000000000000000000000C; productType = "com.apple.product-type.bundle.unit-test"; };
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		080000000000000000000001 /* Project object */ = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = YES; LastSwiftUpdateCheck = 1600; LastUpgradeCheck = 1600; TargetAttributes = {060000000000000000000001 = {CreatedOnToolsVersion = 16.0;}; 060000000000000000000002 = {CreatedOnToolsVersion = 16.0; TestTargetID = 060000000000000000000001;};};}; buildConfigurationList = 070000000000000000000003; compatibilityVersion = "Xcode 14.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = 040000000000000000000001; packageReferences = (090000000000000000000002 /* XCRemoteSwiftPackageReference */); productRefGroup = 040000000000000000000007; projectDirPath = ""; projectRoot = ""; targets = (060000000000000000000001, 060000000000000000000002); };
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		050000000000000000000002 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		050000000000000000000001 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (010000000000000000000001, 010000000000000000000002, 010000000000000000000003, 010000000000000000000004, 010000000000000000000005, 010000000000000000000006, 010000000000000000000007, 010000000000000000000008, 01000000000000000000000C, 01000000000000000000000D, 01000000000000000000000E, 01000000000000000000000F, 010000000000000000000010); runOnlyForDeploymentPostprocessing = 0; };
+		050000000000000000000003 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (01000000000000000000000A,); runOnlyForDeploymentPostprocessing = 0; };
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0B0000000000000000000001 = {isa = PBXTargetDependency; target = 060000000000000000000001; targetProxy = 0A0000000000000000000001; };
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0C0000000000000000000001 = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; COMBINE_HIDPI_IMAGES = YES; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = MeetingNote/Info.plist; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks"; MACOSX_DEPLOYMENT_TARGET = 14.0; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = dev.meetingnote.app; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 6.0; }; name = Debug; };
+		0C0000000000000000000002 = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; COMBINE_HIDPI_IMAGES = YES; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = MeetingNote/Info.plist; LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks"; MACOSX_DEPLOYMENT_TARGET = 14.0; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = dev.meetingnote.app; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_EMIT_LOC_STRINGS = YES; SWIFT_VERSION = 6.0; }; name = Release; };
+		0C0000000000000000000003 = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; GENERATE_INFOPLIST_FILE = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; PRODUCT_BUNDLE_IDENTIFIER = dev.meetingnote.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 6.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeetingNote.app/Contents/MacOS/MeetingNote"; }; name = Debug; };
+		0C0000000000000000000004 = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; GENERATE_INFOPLIST_FILE = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; PRODUCT_BUNDLE_IDENTIFIER = dev.meetingnote.app.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 6.0; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MeetingNote.app/Contents/MacOS/MeetingNote"; }; name = Release; };
+		0C0000000000000000000005 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; SDKROOT = macosx; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG; SWIFT_OPTIMIZATION_LEVEL = "-Onone"; }; name = Debug; };
+		0C0000000000000000000006 = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; CLANG_ENABLE_OBJC_ARC = YES; MACOSX_DEPLOYMENT_TARGET = 14.0; SDKROOT = macosx; SWIFT_COMPILATION_MODE = wholemodule; }; name = Release; };
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		070000000000000000000001 = {isa = XCConfigurationList; buildConfigurations = (0C0000000000000000000001, 0C0000000000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		070000000000000000000002 = {isa = XCConfigurationList; buildConfigurations = (0C0000000000000000000003, 0C0000000000000000000004); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		070000000000000000000003 = {isa = XCConfigurationList; buildConfigurations = (0C0000000000000000000005, 0C0000000000000000000006); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		090000000000000000000002 /* XCRemoteSwiftPackageReference */ = {isa = XCRemoteSwiftPackageReference; repositoryURL = "https://github.com/Blaizzy/mlx-audio-swift.git"; requirement = {kind = revision; revision = cae704f53bc32a3d0b606823828fbc5bedaaf388;}; };
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		090000000000000000000001 /* MLXAudioSTT */ = {isa = XCSwiftPackageProductDependency; package = 090000000000000000000002 /* XCRemoteSwiftPackageReference */; productName = MLXAudioSTT; };
+		090000000000000000000003 /* MLXAudioCore */ = {isa = XCSwiftPackageProductDependency; package = 090000000000000000000002 /* XCRemoteSwiftPackageReference */; productName = MLXAudioCore; };
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 080000000000000000000001 /* Project object */;
+}
