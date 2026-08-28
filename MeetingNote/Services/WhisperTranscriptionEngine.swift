@@ -18,7 +18,7 @@ actor WhisperTranscriptionEngine {
         guard let model else { throw TranscriptionError.modelNotLoaded }
 
         let temporaryURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("meeting-note-\(UUID().uuidString)")
+            .appendingPathComponent("local-transcribe-\(UUID().uuidString)")
             .appendingPathExtension("wav")
         defer { try? FileManager.default.removeItem(at: temporaryURL) }
 

@@ -5,3 +5,4 @@ dist/
 .cache/
 *.xcuserstate
 xcuserdata/
+*.xcodeproj/project.xcworkspace/

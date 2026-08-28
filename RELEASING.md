@@ -1,4 +1,4 @@
-# Releasing Meeting Note
+# Releasing Local Transcribe
 
 ## Local package
 
@@ -12,13 +12,13 @@ Run `make build`. This creates both a ZIP and a drag-to-Applications DMG in `dis
 
 ## Homebrew cask
 
-Copy `Packaging/meeting-note.rb.template` into a Homebrew tap repository, then replace:
+Copy `Packaging/local-transcribe.rb.template` into a Homebrew tap repository as `local-transcribe.rb`, then replace:
 
 - `OWNER/REPOSITORY` with the public GitHub repository
 - `VERSION` with the release version without `v`
-- `SHA256` with `shasum -a 256 dist/MeetingNote-macOS-arm64.zip`
+- `SHA256` with `shasum -a 256 dist/LocalTranscribe-macOS-arm64.zip`
 
-Users can then install with `brew install --cask OWNER/TAP/meeting-note`.
+Users can then install with `brew install --cask OWNER/TAP/local-transcribe`.
 
 ## Apple signing and notarization
 

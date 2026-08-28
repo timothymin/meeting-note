@@ -40,11 +40,11 @@ struct MeetingNoteApp: App {
             MenuBarView()
                 .environmentObject(appModel)
         } label: {
-            Label("Meeting Note", systemImage: appModel.isRecording ? "waveform.circle.fill" : "waveform.circle")
+            Label("Local Transcribe", systemImage: appModel.isRecording ? "waveform.circle.fill" : "waveform.circle")
         }
         .menuBarExtraStyle(.window)
 
-        Window("Meeting Note", id: "transcript") {
+        Window("Local Transcribe", id: "transcript") {
             TranscriptWindow()
                 .environmentObject(appModel)
         }

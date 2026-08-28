@@ -64,11 +64,29 @@ final class AppModel: ObservableObject {
         self.defaults = defaults
         self.selectedModel = defaults.string(forKey: Keys.model) ?? Self.defaultModelID
         self.language = defaults.string(forKey: Keys.language) ?? "auto"
+        let fileManager = FileManager.default
+        let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let newDefaultFolder = documents.appendingPathComponent("Local Transcribe", isDirectory: true)
+        let legacyDefaultFolder = documents.appendingPathComponent("Meeting Notes", isDirectory: true)
+
         if let savedPath = defaults.string(forKey: Keys.outputFolder) {
-            self.outputFolder = URL(fileURLWithPath: savedPath, isDirectory: true)
+            let savedFolder = URL(fileURLWithPath: savedPath, isDirectory: true)
+            if savedFolder.standardizedFileURL == legacyDefaultFolder.standardizedFileURL {
+                if !fileManager.fileExists(atPath: newDefaultFolder.path),
+                   fileManager.fileExists(atPath: legacyDefaultFolder.path) {
+                    try? fileManager.moveItem(at: legacyDefaultFolder, to: newDefaultFolder)
+                }
+                if fileManager.fileExists(atPath: newDefaultFolder.path) {
+                    self.outputFolder = newDefaultFolder
+                    defaults.set(newDefaultFolder.path, forKey: Keys.outputFolder)
+                } else {
+                    self.outputFolder = savedFolder
+                }
+            } else {
+                self.outputFolder = savedFolder
+            }
         } else {
-            let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-            self.outputFolder = documents.appendingPathComponent("Meeting Notes", isDirectory: true)
+            self.outputFolder = newDefaultFolder
         }
         refreshLibrary()
         scheduleModelPreparation()

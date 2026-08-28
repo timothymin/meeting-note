@@ -1,4 +1,4 @@
-# Meeting Note
+# Local Transcribe
 
 **Private, real-time meeting transcription for Apple silicon.**
 
@@ -6,12 +6,12 @@
 [![Swift 6](https://img.shields.io/badge/Swift-6-F05138?logo=swift&logoColor=white)](https://www.swift.org/)
 [![MLX](https://img.shields.io/badge/Apple-MLX-5E5CE6)](https://github.com/ml-explore/mlx-swift)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![CI](https://github.com/timothymin/meeting-note/actions/workflows/ci.yml/badge.svg)](https://github.com/timothymin/meeting-note/actions/workflows/ci.yml)
+[![CI](https://github.com/timothymin/local-transcribe/actions/workflows/ci.yml/badge.svg)](https://github.com/timothymin/local-transcribe/actions/workflows/ci.yml)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/timothymin)
 
-Meeting Note is a native macOS menu-bar app that runs Whisper locally with Apple MLX, shows a near-real-time transcript, and saves each recording as a Markdown file. Audio is not sent to a transcription service.
+Local Transcribe is a native macOS menu-bar app that runs Whisper locally with Apple MLX, shows a near-real-time transcript, and saves each recording as a Markdown file. Audio is not sent to a transcription service.
 
-[Download the latest release](https://github.com/timothymin/meeting-note/releases/latest) · [Report a bug](https://github.com/timothymin/meeting-note/issues/new?template=bug_report.yml) · [Request a feature](https://github.com/timothymin/meeting-note/issues/new?template=feature_request.yml)
+[Download the latest release](https://github.com/timothymin/local-transcribe/releases/latest) · [Report a bug](https://github.com/timothymin/local-transcribe/issues/new?template=bug_report.yml) · [Request a feature](https://github.com/timothymin/local-transcribe/issues/new?template=feature_request.yml)
 
 > The current community build is ad-hoc signed. On first launch, macOS may require right-clicking the app and choosing **Open**. Apple notarization is planned for a future release.
 
@@ -28,7 +28,7 @@ Meeting Note is a native macOS menu-bar app that runs Whisper locally with Apple
 - Configurable model, language, and output folder
 - No account, API key, analytics, or cloud transcription
 
-## Why Meeting Note
+## Why Local Transcribe
 
 - **Local by default:** microphone audio and transcription stay on your Mac.
 - **Ready before recording:** Whisper downloads, loads, and completes a warm-up inference before Start is enabled.
@@ -47,7 +47,7 @@ Meeting Note is a native macOS menu-bar app that runs Whisper locally with Apple
 
 ### Direct download
 
-Download the DMG from [GitHub Releases](https://github.com/timothymin/meeting-note/releases/latest), open it, then drag Meeting Note onto the Applications shortcut.
+Download the DMG from [GitHub Releases](https://github.com/timothymin/local-transcribe/releases/latest), open it, then drag Local Transcribe onto the Applications shortcut.
 
 ### One command
 
@@ -57,7 +57,7 @@ Open Terminal in this folder and run:
 make install
 ```
 
-This builds a release app, signs it locally, installs it to `~/Applications/MeetingNote.app`, and opens it. An existing installation is preserved as a timestamped backup.
+This builds a release app, signs it locally, installs it to `~/Applications/Local Transcribe.app`, and opens it. An existing installation is preserved as a timestamped backup.
 
 To build a distributable ZIP without installing:
 
@@ -68,6 +68,7 @@ make build
 The ZIP and drag-to-Applications DMG are written to `dist/`.
 
 You can also open `MeetingNote.xcodeproj` in Xcode and run the **MeetingNote** scheme.
+If Xcode reports a missing Metal toolchain, install it once with `xcodebuild -downloadComponent MetalToolchain`.
 
 ## First recording
 
@@ -78,7 +79,7 @@ You can also open `MeetingNote.xcodeproj` in Xcode and run the **MeetingNote** s
 5. The model is already ready before **Start transcription** becomes available.
 6. Click **Stop and save** when finished.
 
-The default output folder is `~/Documents/Meeting Notes`. The menu shows the six most recent files; **All transcripts** opens the full file library.
+The default output folder is `~/Documents/Local Transcribe`. Existing installations automatically carry forward transcripts from the former `Meeting Notes` default folder. The menu shows the six most recent files; **All transcripts** opens the full file library.
 
 ## How live transcription works
 
@@ -114,8 +115,8 @@ make test
 After a release build, run the real model/GPU smoke test with:
 
 ```sh
-dist/MeetingNote.app/Contents/MacOS/MeetingNote --mlx-smoke-test
-dist/MeetingNote.app/Contents/MacOS/MeetingNote --audio-smoke-test
+"dist/Local Transcribe.app/Contents/MacOS/LocalTranscribe" --mlx-smoke-test
+"dist/Local Transcribe.app/Contents/MacOS/LocalTranscribe" --audio-smoke-test
 ```
 
 The first command loads Whisper and transcribes generated silence to validate MLX. The second records one second from the microphone to validate the real-time CoreAudio callback and Swift concurrency boundary.

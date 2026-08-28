@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping improve Meeting Note.
+Thanks for helping improve Local Transcribe.
 
 1. Open an issue for substantial behavior or architecture changes.
 2. Keep changes focused and include tests for storage or formatting logic.

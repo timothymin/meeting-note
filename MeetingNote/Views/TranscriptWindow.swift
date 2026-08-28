@@ -77,6 +77,6 @@ struct TranscriptWindow: View {
         if appModel.isRecording || !appModel.displayText.isEmpty {
             return appModel.title.isEmpty ? "Untitled meeting" : appModel.title
         }
-        return appModel.selectedTranscript?.title ?? "Meeting Note"
+        return appModel.selectedTranscript?.title ?? "Local Transcribe"
     }
 }

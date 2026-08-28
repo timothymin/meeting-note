@@ -50,7 +50,7 @@ struct MenuBarView: View {
             .frame(width: 30, height: 30)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Meeting Note")
+                Text("Local Transcribe")
                     .font(.system(size: 14, weight: .bold))
                 HStack(spacing: 5) {
                     Circle()
@@ -274,7 +274,7 @@ struct MenuBarView: View {
             Button { appModel.revealOutputFolder() } label: { Label("Files", systemImage: "folder") }
             Spacer()
             Button { NSApplication.shared.terminate(nil) } label: { Image(systemName: "power") }
-                .help("Quit Meeting Note")
+                .help("Quit Local Transcribe")
         }
         .buttonStyle(.plain)
         .font(.system(size: 10.5, weight: .medium))

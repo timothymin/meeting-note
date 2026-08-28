@@ -1,11 +1,11 @@
 name: Bug report
-description: Report a reproducible problem with Meeting Note
+description: Report a reproducible problem with Local Transcribe
 title: "[Bug]: "
 labels: [bug]
 body:
   - type: markdown
     attributes:
-      value: Thanks for helping improve Meeting Note. Do not include private transcript content.
+      value: Thanks for helping improve Local Transcribe. Do not include private transcript content.
   - type: input
     id: mac
     attributes:
@@ -16,7 +16,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Meeting Note version
+      label: Local Transcribe version
       placeholder: 0.1.0
     validations:
       required: true

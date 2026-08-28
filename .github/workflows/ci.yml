@@ -24,7 +24,7 @@ jobs:
       - name: Upload app packages
         uses: actions/upload-artifact@v4
         with:
-          name: MeetingNote-macOS-arm64
+          name: LocalTranscribe-macOS-arm64
           path: |
-            dist/MeetingNote-macOS-arm64.zip
-            dist/MeetingNote-macOS-arm64.dmg
+            dist/LocalTranscribe-macOS-arm64.zip
+            dist/LocalTranscribe-macOS-arm64.dmg

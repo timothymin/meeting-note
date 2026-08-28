@@ -1,0 +1,19 @@
+cask "local-transcribe" do
+  version "VERSION"
+  sha256 "SHA256"
+
+  url "https://github.com/OWNER/REPOSITORY/releases/download/v#{version}/LocalTranscribe-macOS-arm64.zip"
+  name "Local Transcribe"
+  desc "Private real-time transcription with MLX on Apple silicon"
+  homepage "https://github.com/OWNER/REPOSITORY"
+
+  depends_on arch: :arm64
+  depends_on macos: ">= :sonoma"
+
+  app "Local Transcribe.app"
+
+  zap trash: [
+    "~/Library/Preferences/app.localtranscribe.mac.plist",
+    "~/Library/Preferences/dev.meetingnote.app.plist"
+  ]
+end
