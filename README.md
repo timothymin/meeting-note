@@ -7,7 +7,6 @@
 [![MLX](https://img.shields.io/badge/Apple-MLX-5E5CE6)](https://github.com/ml-explore/mlx-swift)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![CI](https://github.com/timothymin/local-transcribe/actions/workflows/ci.yml/badge.svg)](https://github.com/timothymin/local-transcribe/actions/workflows/ci.yml)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy_Me_a_Coffee-Support-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/timothymin)
 
 Local Transcribe is a native macOS menu-bar app that runs Whisper locally with Apple MLX, shows a near-real-time transcript, and saves each recording as a Markdown file. Audio is not sent to a transcription service.
 
