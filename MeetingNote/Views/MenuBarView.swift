@@ -6,6 +6,7 @@ struct MenuBarView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.openSettings) private var openSettings
     @State private var appeared = false
+    @State private var contextExpanded = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -104,6 +105,40 @@ struct MenuBarView: View {
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
                             .stroke(AppDesign.cardBorder, lineWidth: 1)
                     )
+
+                DisclosureGroup(isExpanded: $contextExpanded) {
+                    VStack(alignment: .leading, spacing: 6) {
+                        TextEditor(text: $appModel.sessionContext)
+                            .font(.system(size: 11))
+                            .frame(height: 64)
+                            .padding(5)
+                            .scrollContentBackground(.hidden)
+                            .background(RoundedRectangle(cornerRadius: 6).fill(AppDesign.mutedBackground))
+                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(AppDesign.cardBorder))
+                        HStack {
+                            Text("Used only for this transcript")
+                                .font(.system(size: 9.5))
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            if appModel.sessionContext != appModel.defaultContext {
+                                Button("Reset") { appModel.sessionContext = appModel.defaultContext }
+                                    .buttonStyle(.plain)
+                                    .font(.system(size: 9.5, weight: .medium))
+                                    .foregroundStyle(Color.accentColor)
+                            }
+                        }
+                    }
+                    .padding(.top, 6)
+                } label: {
+                    HStack(spacing: 5) {
+                        Image(systemName: "text.quote")
+                        Text("Context / Vocabulary")
+                        if !appModel.sessionContext.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            Circle().fill(Color.green).frame(width: 5, height: 5)
+                        }
+                    }
+                    .font(.system(size: 10.5, weight: .medium))
+                }
 
                 primaryButton
             }
@@ -247,6 +282,9 @@ struct MenuBarView: View {
                                 openWindow(id: "transcript")
                             }
                             Button("Reveal in Finder") { appModel.reveal(file) }
+                            if !file.contextPrompt.isEmpty {
+                                Button("Use Context for New Transcript") { appModel.useContext(from: file) }
+                            }
                             Divider()
                             Button("Move to Trash", role: .destructive) { appModel.deleteTranscript(file) }
                         }

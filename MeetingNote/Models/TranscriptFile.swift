@@ -7,6 +7,7 @@ struct TranscriptFile: Identifiable, Hashable, Sendable {
     let duration: TimeInterval?
     let preview: String
     let content: String
+    let contextPrompt: String
 
     var id: URL { url }
 }

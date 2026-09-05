@@ -14,6 +14,9 @@ struct TranscriptWindow: View {
                 .tag(file.url)
                 .contextMenu {
                     Button("Reveal in Finder") { appModel.reveal(file) }
+                    if !file.contextPrompt.isEmpty {
+                        Button("Use Context for New Transcript") { appModel.useContext(from: file) }
+                    }
                     Button("Move to Trash", role: .destructive) { appModel.deleteTranscript(file) }
                 }
             }
@@ -26,13 +29,34 @@ struct TranscriptWindow: View {
                 header
                 Divider()
                 ScrollView {
-                    Text(detailText)
-                        .font(.body)
-                        .lineSpacing(5)
-                        .foregroundStyle(detailText.isEmpty ? .tertiary : .primary)
-                        .textSelection(.enabled)
-                        .frame(maxWidth: .infinity, alignment: .topLeading)
-                        .padding(24)
+                    VStack(alignment: .leading, spacing: 16) {
+                        if let file = appModel.selectedTranscript,
+                           !appModel.isRecording,
+                           !file.contextPrompt.isEmpty {
+                            VStack(alignment: .leading, spacing: 6) {
+                                HStack {
+                                    Label("Context / Vocabulary", systemImage: "text.quote")
+                                        .font(.caption.weight(.semibold))
+                                    Spacer()
+                                    Button("Use again") { appModel.useContext(from: file) }
+                                        .buttonStyle(.link)
+                                }
+                                Text(file.contextPrompt)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .textSelection(.enabled)
+                            }
+                            .padding(12)
+                            .background(RoundedRectangle(cornerRadius: 8).fill(.secondary.opacity(0.08)))
+                        }
+                        Text(detailText)
+                            .font(.body)
+                            .lineSpacing(5)
+                            .foregroundStyle(detailText.isEmpty ? .tertiary : .primary)
+                            .textSelection(.enabled)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding(24)
                 }
             }
         }

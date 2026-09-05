@@ -23,6 +23,8 @@ Local Transcribe is a native macOS menu-bar app that runs Whisper locally with A
 - Startup Whisper warm-up inference before the UI reports `Model ready`
 - Live transcript updates approximately every five seconds
 - 20-second rolling audio context for more stable sentences
+- Local Whisper `initial_prompt` context using recent transcript text and session vocabulary
+- Per-recording Context / Vocabulary with a reusable default and Markdown metadata
 - Session-locked language presets, defaulting to Korean with English terms supported
 - Recent Markdown files directly in the menu popover
 - Searchable transcript library window
@@ -74,7 +76,7 @@ If Xcode reports a missing Metal toolchain, install it once with `xcodebuild -do
 ## First recording
 
 1. Click the waveform icon in the menu bar.
-2. Optionally enter a meeting title.
+2. Optionally enter a meeting title and expand **Context / Vocabulary** to add names or domain terms.
 3. Click **Start transcription**.
 4. Approve microphone access.
 5. The model is already ready before **Start transcription** becomes available.
@@ -84,13 +86,15 @@ The default output folder is `~/Documents/Local Transcribe`. Existing installati
 
 ## How live transcription works
 
-The app captures microphone audio with `AVAudioEngine`. Approximately every five seconds it sends a rolling window containing up to the most recent 20 seconds to a resident MLX Whisper model. The longer acoustic context helps Whisper preserve sentence flow, while sequence alignment appends only newly recognized words. The selected dominant language stays fixed for the recording. Audio samples stay in memory and are discarded after transcription; only Markdown is persisted.
+The app captures microphone audio with `AVAudioEngine`. Approximately every five seconds it sends a rolling window containing up to the most recent 20 seconds to a resident MLX Whisper model. The longer acoustic context helps Whisper preserve sentence flow, while sequence alignment appends only newly recognized words. It also conditions each decode with the tail of the confirmed transcript plus the recording's Context / Vocabulary text through Whisper's local `initial_prompt`. The selected dominant language and session context stay fixed while recording. Audio samples stay in memory and are discarded after transcription; the transcript and its context metadata are persisted as Markdown.
+
+Context works best as a short natural-language description followed by exact names and terminology, for example: `Meeting transcription of medtech startup Vital Robotics, focusing on echocardiography (TTE), ultrasound robot AI, and clinical workflow.` This is decoder guidance rather than an instruction-following LLM, so concise vocabulary is more reliable than a long prompt.
 
 ## Models
 
 The default is `mlx-community/whisper-large-v3-turbo`, which provides the best practical multilingual speed/accuracy balance for live use. Settings also offers full Large V3, Small, and Base.
 
-Model downloads and inference are provided by the MIT-licensed [MLX Audio Swift](https://github.com/Blaizzy/mlx-audio-swift) package. The dependency is pinned to a tested source revision for reproducible builds.
+Model downloads and inference are provided by a public [Local Transcribe fork of MLX Audio Swift](https://github.com/timothymin/mlx-audio-swift), based on the MIT-licensed [upstream project](https://github.com/Blaizzy/mlx-audio-swift). The fork exposes Whisper's `initial_prompt` through `STTGenerateParameters`; the dependency is pinned to a tested source revision for reproducible builds.
 
 Release packaging also includes the version-matched MLX Metal shader library. The build script downloads the official MLX Swift `0.31.6` Cmlx release asset and verifies its published SHA-256 before extraction; this is required because command-line SwiftPM builds do not emit `default.metallib` automatically.
 

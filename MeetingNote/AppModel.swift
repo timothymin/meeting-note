@@ -12,6 +12,7 @@ final class AppModel: ObservableObject {
     static let defaultModelID = "mlx-community/whisper-large-v3-turbo"
     static let defaultLanguage = "ko"
     static let rollingContextDuration: TimeInterval = 20
+    static let contextExample = "Meeting transcription of medtech startup Vital Robotics, focusing on echocardiography (TTE), ultrasound robot AI, and clinical workflow."
 
     struct LanguageChoice: Identifiable, Hashable {
         let id: String
@@ -40,6 +41,15 @@ final class AppModel: ObservableObject {
     @Published var language: String {
         didSet { defaults.set(language, forKey: Keys.language) }
     }
+    @Published var defaultContext: String {
+        didSet {
+            defaults.set(defaultContext, forKey: Keys.defaultContext)
+            if !isRecording, sessionContext == oldValue {
+                sessionContext = defaultContext
+            }
+        }
+    }
+    @Published var sessionContext: String
     @Published var outputFolder: URL {
         didSet {
             defaults.set(outputFolder.path, forKey: Keys.outputFolder)
@@ -65,6 +75,7 @@ final class AppModel: ObservableObject {
     private enum Keys {
         static let model = "selectedModel"
         static let language = "language"
+        static let defaultContext = "defaultContext"
         static let outputFolder = "outputFolder"
     }
 
@@ -74,15 +85,19 @@ final class AppModel: ObservableObject {
     private let recorder = AudioRecorder()
     private let engine = WhisperTranscriptionEngine()
     private var startedAt: Date?
+    private var activeContext = ""
     private var transcriptionLoop: Task<Void, Never>?
     private var modelPreparationTask: Task<Void, Never>?
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = .standard, prepareModelOnLaunch: Bool = true) {
         self.defaults = defaults
         self.selectedModel = defaults.string(forKey: Keys.model) ?? Self.defaultModelID
         let savedLanguage = defaults.string(forKey: Keys.language)?.lowercased()
         self.language = savedLanguage.flatMap { $0 == "auto" ? nil : $0 }
             ?? Self.defaultLanguage
+        let savedContext = defaults.string(forKey: Keys.defaultContext) ?? ""
+        self.defaultContext = savedContext
+        self.sessionContext = savedContext
         let fileManager = FileManager.default
         let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let newDefaultFolder = documents.appendingPathComponent("Local Transcribe", isDirectory: true)
@@ -109,7 +124,9 @@ final class AppModel: ObservableObject {
         }
         defaults.set(language, forKey: Keys.language)
         refreshLibrary()
-        scheduleModelPreparation()
+        if prepareModelOnLaunch {
+            scheduleModelPreparation()
+        }
     }
 
     var displayText: String { confirmedText }
@@ -131,6 +148,7 @@ final class AppModel: ObservableObject {
         lastSavedURL = nil
         confirmedText = ""
         startedAt = Date()
+        activeContext = sessionContext.trimmingCharacters(in: .whitespacesAndNewlines)
 
         do {
             status = "Starting microphone…"
@@ -142,6 +160,7 @@ final class AppModel: ObservableObject {
         } catch {
             recorder.stop()
             startedAt = nil
+            activeContext = ""
             isRecording = false
             isBusy = false
             status = "Could not start"
@@ -173,7 +192,8 @@ final class AppModel: ObservableObject {
                 endedAt: Date(),
                 text: finalText,
                 model: selectedModel,
-                language: language
+                language: language,
+                contextPrompt: activeContext
             )
             do {
                 lastSavedURL = try store.save(session, to: outputFolder)
@@ -188,6 +208,7 @@ final class AppModel: ObservableObject {
         }
 
         self.startedAt = nil
+        activeContext = ""
         isBusy = false
     }
 
@@ -230,7 +251,7 @@ final class AppModel: ObservableObject {
     func runAudioCaptureSmokeTest() async throws {
         try await recorder.start()
         defer { recorder.stop() }
-        try await Task.sleep(for: .seconds(1))
+        try await Task.sleep(for: .seconds(2))
         guard recorder.buffer.snapshot(minimumDuration: 0.1) != nil else {
             throw AudioRecorderError.noSamplesCaptured
         }
@@ -249,6 +270,12 @@ final class AppModel: ObservableObject {
     }
 
     func selectTranscript(_ file: TranscriptFile) { selectedTranscript = file }
+
+    func useContext(from file: TranscriptFile) {
+        guard !isRecording, !isBusy else { return }
+        sessionContext = file.contextPrompt
+        status = file.contextPrompt.isEmpty ? "Context cleared" : "Context loaded"
+    }
 
     func deleteTranscript(_ file: TranscriptFile) {
         do {
@@ -318,7 +345,15 @@ final class AppModel: ObservableObject {
     private func transcribeAvailableAudio(minimumDuration: TimeInterval) async throws {
         guard let chunk = recorder.buffer.snapshot(minimumDuration: minimumDuration) else { return }
         status = isRecording ? "Transcribing…" : status
-        let newText = try await engine.transcribe(chunk, language: language)
+        let initialPrompt = PromptContextBuilder.build(
+            sessionContext: activeContext,
+            transcript: confirmedText
+        )
+        let newText = try await engine.transcribe(
+            chunk,
+            language: language,
+            initialPrompt: initialPrompt
+        )
         if !newText.isEmpty { confirmedText = TranscriptMerger.merge(confirmedText, with: newText) }
         recorder.buffer.commit(chunk, keepingOverlap: Self.rollingContextDuration)
         if isRecording { status = "Listening" }

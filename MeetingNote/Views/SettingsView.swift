@@ -44,6 +44,35 @@ struct SettingsView: View {
                 }
 
                 settingsSection(
+                    title: "Context & Vocabulary",
+                    subtitle: "Bias names and terminology without sending data anywhere.",
+                    icon: "text.quote"
+                ) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Default context for new transcripts")
+                            .font(.system(size: 12, weight: .medium))
+                        TextEditor(text: $appModel.defaultContext)
+                            .font(.system(size: 11.5))
+                            .frame(minHeight: 78)
+                            .padding(6)
+                            .scrollContentBackground(.hidden)
+                            .background(RoundedRectangle(cornerRadius: 6).fill(AppDesign.mutedBackground))
+                            .overlay(RoundedRectangle(cornerRadius: 6).stroke(AppDesign.cardBorder))
+                            .disabled(appModel.isRecording || appModel.isBusy)
+                        HStack {
+                            Text("Whisper receives this plus the recent transcript as a local initial prompt.")
+                                .font(.system(size: 10.5))
+                                .foregroundStyle(.secondary)
+                            Spacer()
+                            Button("Use example") {
+                                appModel.defaultContext = AppModel.contextExample
+                            }
+                            .disabled(appModel.isRecording || appModel.isBusy)
+                        }
+                    }
+                }
+
+                settingsSection(
                     title: "Files",
                     subtitle: "Markdown remains the source of truth.",
                     icon: "folder.fill"
@@ -80,7 +109,7 @@ struct SettingsView: View {
             }
             .padding(28)
         }
-        .frame(width: 600, height: 560)
+        .frame(width: 600, height: 680)
         .background(VibrancyBackground())
     }
 

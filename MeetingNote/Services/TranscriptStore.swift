@@ -41,6 +41,7 @@ struct TranscriptStore {
         duration_seconds: \(Int(session.duration.rounded()))
         model: \(yamlQuoted(session.model))
         language: \(yamlQuoted(language))
+        context: \(yamlQuoted(session.contextPrompt))
         ---
 
         # \(title)
@@ -73,7 +74,11 @@ struct TranscriptStore {
     }
 
     private func yamlQuoted(_ value: String) -> String {
-        let escaped = value.replacingOccurrences(of: "\\", with: "\\\\").replacingOccurrences(of: "\"", with: "\\\"")
+        let escaped = value
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+            .replacingOccurrences(of: "\r", with: "\\r")
+            .replacingOccurrences(of: "\n", with: "\\n")
         return "\"\(escaped)\""
     }
 }

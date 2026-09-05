@@ -41,7 +41,8 @@ struct TranscriptLibrary {
             createdAt: created,
             duration: values["duration_seconds"].flatMap { TimeInterval($0.unquoted) },
             preview: String(preview.prefix(140)),
-            content: body
+            content: body,
+            contextPrompt: values["context"]?.unquoted ?? ""
         )
     }
 
@@ -69,6 +70,8 @@ private extension String {
     var unquoted: String {
         guard count >= 2, first == "\"", last == "\"" else { return self }
         return String(dropFirst().dropLast())
+            .replacingOccurrences(of: "\\n", with: "\n")
+            .replacingOccurrences(of: "\\r", with: "\r")
             .replacingOccurrences(of: "\\\"", with: "\"")
             .replacingOccurrences(of: "\\\\", with: "\\")
     }

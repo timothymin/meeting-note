@@ -7,7 +7,8 @@ struct MeetingNoteApp: App {
     @StateObject private var appModel: AppModel
 
     init() {
-        let model = AppModel()
+        let isAudioSmokeTest = CommandLine.arguments.contains("--audio-smoke-test")
+        let model = AppModel(prepareModelOnLaunch: !isAudioSmokeTest)
         _appModel = StateObject(wrappedValue: model)
 
         if CommandLine.arguments.contains("--mlx-smoke-test") {

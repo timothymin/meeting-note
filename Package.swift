@@ -9,8 +9,8 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/Blaizzy/mlx-audio-swift.git",
-            revision: "cae704f53bc32a3d0b606823828fbc5bedaaf388"
+            url: "https://github.com/timothymin/mlx-audio-swift.git",
+            revision: "243679e4d4334edde0903952e59d4b30b38721e1"
         )
     ],
     targets: [
