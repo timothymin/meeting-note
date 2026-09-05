@@ -30,10 +30,16 @@ struct SettingsView: View {
                         .disabled(appModel.isRecording || appModel.isBusy)
                     }
                     Divider()
-                    settingRow("Language", help: "Use auto or an ISO code such as en, ko, or ja.") {
-                        TextField("auto", text: $appModel.language)
-                            .textFieldStyle(.roundedBorder)
-                            .frame(width: 120)
+                    settingRow("Language", help: "The selected dominant language stays fixed for the entire recording.") {
+                        Picker("", selection: $appModel.language) {
+                            ForEach(appModel.availableLanguages) { language in
+                                Text("\(language.label) — \(language.detail)")
+                                    .tag(language.id)
+                            }
+                        }
+                        .labelsHidden()
+                        .frame(width: 220)
+                        .disabled(appModel.isRecording || appModel.isBusy)
                     }
                 }
 

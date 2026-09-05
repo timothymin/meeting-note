@@ -10,6 +10,14 @@ enum ModelPreparationState: Equatable {
 @MainActor
 final class AppModel: ObservableObject {
     static let defaultModelID = "mlx-community/whisper-large-v3-turbo"
+    static let defaultLanguage = "ko"
+    static let rollingContextDuration: TimeInterval = 20
+
+    struct LanguageChoice: Identifiable, Hashable {
+        let id: String
+        let label: String
+        let detail: String
+    }
 
     @Published var title = ""
     @Published var confirmedText = ""
@@ -44,6 +52,15 @@ final class AppModel: ObservableObject {
         "openai/whisper-small",
         "openai/whisper-base"
     ]
+    let availableLanguages = [
+        LanguageChoice(id: "ko", label: "한국어 중심", detail: "English terms supported"),
+        LanguageChoice(id: "en", label: "English", detail: "English dominant"),
+        LanguageChoice(id: "ja", label: "日本語", detail: "Japanese dominant"),
+        LanguageChoice(id: "zh", label: "中文", detail: "Chinese dominant"),
+        LanguageChoice(id: "es", label: "Español", detail: "Spanish dominant"),
+        LanguageChoice(id: "fr", label: "Français", detail: "French dominant"),
+        LanguageChoice(id: "de", label: "Deutsch", detail: "German dominant")
+    ]
 
     private enum Keys {
         static let model = "selectedModel"
@@ -63,7 +80,9 @@ final class AppModel: ObservableObject {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.selectedModel = defaults.string(forKey: Keys.model) ?? Self.defaultModelID
-        self.language = defaults.string(forKey: Keys.language) ?? "auto"
+        let savedLanguage = defaults.string(forKey: Keys.language)?.lowercased()
+        self.language = savedLanguage.flatMap { $0 == "auto" ? nil : $0 }
+            ?? Self.defaultLanguage
         let fileManager = FileManager.default
         let documents = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
         let newDefaultFolder = documents.appendingPathComponent("Local Transcribe", isDirectory: true)
@@ -88,6 +107,7 @@ final class AppModel: ObservableObject {
         } else {
             self.outputFolder = newDefaultFolder
         }
+        defaults.set(language, forKey: Keys.language)
         refreshLibrary()
         scheduleModelPreparation()
     }
@@ -300,7 +320,7 @@ final class AppModel: ObservableObject {
         status = isRecording ? "Transcribing…" : status
         let newText = try await engine.transcribe(chunk, language: language)
         if !newText.isEmpty { confirmedText = TranscriptMerger.merge(confirmedText, with: newText) }
-        recorder.buffer.commit(chunk, keepingOverlap: 1.25)
+        recorder.buffer.commit(chunk, keepingOverlap: Self.rollingContextDuration)
         if isRecording { status = "Listening" }
     }
 }

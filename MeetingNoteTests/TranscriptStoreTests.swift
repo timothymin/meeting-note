@@ -31,4 +31,28 @@ struct TranscriptStoreTests {
 
         #expect(merged == "Today we will review the product launch and discuss customer feedback")
     }
+
+    @Test func mergesLongRollingContextWithoutDuplicatingIt() {
+        let existingWords = (0..<50).map { "word\($0)" }
+        let incomingWords = (10..<60).map { "word\($0)" }
+
+        let merged = TranscriptMerger.merge(
+            existingWords.joined(separator: " "),
+            with: incomingWords.joined(separator: " ")
+        )
+
+        #expect(merged == (0..<60).map { "word\($0)" }.joined(separator: " "))
+    }
+
+    @Test func toleratesSmallRevisionsInsideRollingContext() {
+        let merged = TranscriptMerger.merge(
+            "오늘 회의에서는 바이탈 로보틱스의 새로운 로봇 플랫폼을 검토합니다",
+            with: "바이탈 로보틱스의 새로운 로봇 플랫폼을 함께 검토합니다 다음 안건은 배포 일정입니다"
+        )
+
+        #expect(
+            merged
+                == "오늘 회의에서는 바이탈 로보틱스의 새로운 로봇 플랫폼을 검토합니다 다음 안건은 배포 일정입니다"
+        )
+    }
 }

@@ -22,6 +22,8 @@ Local Transcribe is a native macOS menu-bar app that runs Whisper locally with A
 - Background model download and loading before recording starts
 - Startup Whisper warm-up inference before the UI reports `Model ready`
 - Live transcript updates approximately every five seconds
+- 20-second rolling audio context for more stable sentences
+- Session-locked language presets, defaulting to Korean with English terms supported
 - Recent Markdown files directly in the menu popover
 - Searchable transcript library window
 - Configurable model, language, and output folder
@@ -82,7 +84,7 @@ The default output folder is `~/Documents/Local Transcribe`. Existing installati
 
 ## How live transcription works
 
-The app captures microphone audio with `AVAudioEngine`. Approximately every five seconds it sends the available audio to a resident MLX Whisper model. Consecutive chunks overlap by 1.25 seconds, and the app removes repeated words while merging results. Audio samples stay in memory and are discarded after transcription; only Markdown is persisted.
+The app captures microphone audio with `AVAudioEngine`. Approximately every five seconds it sends a rolling window containing up to the most recent 20 seconds to a resident MLX Whisper model. The longer acoustic context helps Whisper preserve sentence flow, while sequence alignment appends only newly recognized words. The selected dominant language stays fixed for the recording. Audio samples stay in memory and are discarded after transcription; only Markdown is persisted.
 
 ## Models
 
